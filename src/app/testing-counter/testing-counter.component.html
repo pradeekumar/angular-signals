@@ -1,0 +1,39 @@
+<button type="button" (click)="postStore.loadData()" class="btn btn-primary btn-success mt-3 mr-3">
+  {{ postStore.isLoading() ? 'Loading Data' : 'Load Data' }}
+</button>
+<button type="button" [disabled]="postStore.count() == 0" (click)="postStore.clearData()"
+        class="btn btn-primary btn-danger mt-3 mr-3">Clear Data
+</button>
+
+<!--{{ postStore.isLoading() }}-->
+@if (postStore.count() > 0) {
+  <div class="overflow-auto" style="height: 400px">
+    <table class="table table-bordered mt-4">
+      <tr>
+        <th>ID</th>
+        <th>UserID</th>
+        <th>Title</th>
+      </tr>
+      @for (item of postStore.items(); track item; let i = $index) {
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.userId }}</td>
+          <td>{{ item.title }}</td>
+        </tr>
+      }
+    </table>
+  </div>
+}
+
+<div class="mt-5 p-5 border">
+  <h3 class="">Child Component </h3>
+  <button type="button" (click)="counterStore.increment()" class="btn btn-primary btn-success mt-3 mr-3">Increment
+  </button>
+  <button type="button" [disabled]="counterStore.count() == 0" (click)="counterStore.decrement()"
+          class="btn btn-primary btn-danger mt-3  mr-3">Decrement
+  </button>
+  <button type="button" [disabled]="counterStore.count() == 0" (click)="counterStore.reset()"
+          class="btn btn-primary btn-danger btn-ifo mt-3 ">Reset
+  </button>
+  <div class="mt-4">{{ counterStore.count() }}</div>
+</div>
